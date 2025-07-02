@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transport Billing System</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Animation -->
+        <header class="header animated-header">
+            <div class="logo-section">
+                <i class="fas fa-truck-moving"></i>
+                <h1>Transport Billing System</h1>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-section="dashboard">
+                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                </button>
+                <button class="nav-btn" data-section="invoice">
+                    <i class="fas fa-file-invoice"></i> Invoice
+                </button>
+                <button class="nav-btn" data-section="expenses">
+                    <i class="fas fa-wallet"></i> Expenses
+                </button>
+                <button class="nav-btn" data-section="reports">
+                    <i class="fas fa-chart-bar"></i> Reports
+                </button>
+            </nav>
+        </header>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active-section">
+            <div class="stats-grid">
+                <div class="stat-card bounce-in">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Invoices</h3>
+                        <p class="stat-number" data-count="156">0</p>
+                    </div>
+                </div>
+                <div class="stat-card bounce-in" style="animation-delay: 0.1s">
+                    <div class="stat-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Revenue</h3>
+                        <p class="stat-number" data-count="250000">₹0</p>
+                    </div>
+                </div>
+                <div class="stat-card bounce-in" style="animation-delay: 0.2s">
+                    <div class="stat-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Active Transports</h3>
+                        <p class="stat-number" data-count="23">0</p>
+                    </div>
+                </div>
+                <div class="stat-card bounce-in" style="animation-delay: 0.3s">
+                    <div class="stat-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Pending Payments</h3>
+                        <p class="stat-number" data-count="12">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recent-activity slide-up">
+                <h2>Recent Activity</h2>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-plus-circle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p>New invoice created - INV-2024-001</p>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p>Payment received - ₹15,000</p>
+                            <span class="activity-time">5 hours ago</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <div class="activity-content">
+                            <p>Transport completed - Delhi to Mumbai</p>
+                            <span class="activity-time">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Invoice Section -->
+        <section id="invoice" class="section">
+            <div class="invoice-header">
+                <h2>Create Invoice</h2>
+                <button class="btn-primary" id="generatePDF">
+                    <i class="fas fa-file-pdf"></i> Generate PDF
+                </button>
+            </div>
+
+            <div class="invoice-form-container">
+                <form id="invoiceForm" class="invoice-form">
+                    <!-- Company Details -->
+                    <div class="form-section fade-in">
+                        <h3>Company Details</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input type="text" id="companyName" placeholder="Enter company name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>GSTIN</label>
+                                <input type="text" id="gstin" placeholder="Enter GSTIN" pattern="[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}">
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <textarea id="companyAddress" placeholder="Enter company address" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="tel" id="companyPhone" placeholder="Enter phone number">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Customer Details -->
+                    <div class="form-section fade-in" style="animation-delay: 0.1s">
+                        <h3>Customer Details</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Customer Name</label>
+                                <input type="text" id="customerName" placeholder="Enter customer name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Customer GSTIN</label>
+                                <input type="text" id="customerGstin" placeholder="Enter customer GSTIN">
+                            </div>
+                            <div class="form-group">
+                                <label>Customer Address</label>
+                                <textarea id="customerAddress" placeholder="Enter customer address" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Customer Phone</label>
+                                <input type="tel" id="customerPhone" placeholder="Enter customer phone">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Invoice Details -->
+                    <div class="form-section fade-in" style="animation-delay: 0.2s">
+                        <h3>Invoice Details</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Invoice Number</label>
+                                <input type="text" id="invoiceNumber" placeholder="INV-2024-001" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Invoice Date</label>
+                                <input type="date" id="invoiceDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Due Date</label>
+                                <input type="date" id="dueDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Transport Route</label>
+                                <input type="text" id="transportRoute" placeholder="Delhi to Mumbai" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Items Section -->
+                    <div class="form-section fade-in" style="animation-delay: 0.3s">
+                        <div class="section-header">
+                            <h3>Items/Services</h3>
+                            <button type="button" class="btn-secondary" id="addItem">
+                                <i class="fas fa-plus"></i> Add Item
+                            </button>
+                        </div>
+                        
+                        <div class="items-container" id="itemsContainer">
+                            <div class="item-row slide-down" data-item="1">
+                                <div class="item-fields">
+                                    <input type="text" placeholder="Description" class="item-desc" required>
+                                    <input type="number" placeholder="Qty" class="item-qty" min="1" value="1" required>
+                                    <input type="number" placeholder="Rate" class="item-rate" step="0.01" required>
+                                    <select class="gst-rate">
+                                        <option value="0">0% GST</option>
+                                        <option value="5">5% GST</option>
+                                        <option value="12">12% GST</option>
+                                        <option value="18" selected>18% GST</option>
+                                        <option value="28">28% GST</option>
+                                    </select>
+                                    <input type="number" placeholder="Amount" class="item-amount" readonly>
+                                    <button type="button" class="btn-danger remove-item">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="form-section fade-in" style="animation-delay: 0.4s">
+                        <h3>Attachments</h3>
+                        <div class="upload-area" id="uploadArea">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Drag & drop images here or click to select</p>
+                            <input type="file" id="imageUpload" multiple accept="image/*" hidden>
+                        </div>
+                        <div class="uploaded-images" id="uploadedImages"></div>
+                    </div>
+
+                    <!-- Totals -->
+                    <div class="totals-section fade-in" style="animation-delay: 0.5s">
+                        <div class="totals-grid">
+                            <div class="total-row">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">₹0.00</span>
+                            </div>
+                            <div class="total-row">
+                                <span>CGST:</span>
+                                <span id="cgst">₹0.00</span>
+                            </div>
+                            <div class="total-row">
+                                <span>SGST:</span>
+                                <span id="sgst">₹0.00</span>
+                            </div>
+                            <div class="total-row">
+                                <span>IGST:</span>
+                                <span id="igst">₹0.00</span>
+                            </div>
+                            <div class="total-row final-total">
+                                <span>Total Amount:</span>
+                                <span id="totalAmount">₹0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" id="saveInvoice">
+                            <i class="fas fa-save"></i> Save Invoice
+                        </button>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-paper-plane"></i> Generate Invoice
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Expenses Section -->
+        <section id="expenses" class="section">
+            <div class="expenses-header">
+                <h2>Manage Expenses</h2>
+                <button class="btn-primary" id="addExpense">
+                    <i class="fas fa-plus"></i> Add Expense
+                </button>
+            </div>
+
+            <div class="expenses-grid">
+                <div class="expense-card slide-up">
+                    <div class="expense-header">
+                        <h3>Fuel Expenses</h3>
+                        <span class="expense-amount">₹25,000</span>
+                    </div>
+                    <div class="expense-details">
+                        <p>Date: 15/12/2024</p>
+                        <p>Vehicle: DL-01-AB-1234</p>
+                    </div>
+                </div>
+                <div class="expense-card slide-up" style="animation-delay: 0.1s">
+                    <div class="expense-header">
+                        <h3>Maintenance</h3>
+                        <span class="expense-amount">₹8,500</span>
+                    </div>
+                    <div class="expense-details">
+                        <p>Date: 14/12/2024</p>
+                        <p>Type: Oil Change</p>
+                    </div>
+                </div>
+                <div class="expense-card slide-up" style="animation-delay: 0.2s">
+                    <div class="expense-header">
+                        <h3>Toll Charges</h3>
+                        <span class="expense-amount">₹1,200</span>
+                    </div>
+                    <div class="expense-details">
+                        <p>Date: 13/12/2024</p>
+                        <p>Route: NH-1</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section id="reports" class="section">
+            <div class="reports-header">
+                <h2>Reports & Analytics</h2>
+                <button class="btn-primary">
+                    <i class="fas fa-download"></i> Export Report
+                </button>
+            </div>
+
+            <div class="chart-container fade-in">
+                <h3>Monthly Revenue</h3>
+                <div class="chart-placeholder">
+                    <div class="chart-bars">
+                        <div class="bar" style="height: 60%; animation-delay: 0.1s"></div>
+                        <div class="bar" style="height: 80%; animation-delay: 0.2s"></div>
+                        <div class="bar" style="height: 45%; animation-delay: 0.3s"></div>
+                        <div class="bar" style="height: 90%; animation-delay: 0.4s"></div>
+                        <div class="bar" style="height: 70%; animation-delay: 0.5s"></div>
+                        <div class="bar" style="height: 85%; animation-delay: 0.6s"></div>
+                    </div>
+                    <div class="chart-labels">
+                        <span>Jan</span>
+                        <span>Feb</span>
+                        <span>Mar</span>
+                        <span>Apr</span>
+                        <span>May</span>
+                        <span>Jun</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-check-circle"></i>
+                <h3>Success!</h3>
+            </div>
+            <div class="modal-body">
+                <p>Invoice generated successfully!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" id="closeModal">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
